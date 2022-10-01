@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+    <title>Add A New Contact</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Space+Grotesk:wght@300&display=swap');
+    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    body{
+        overflow-x: hidden !important;
+        font-family: 'Dancing Script', cursive;
+        font-size: 1.8rem;
+    }
+    .color-text{
+        color: aliceblue !important;
+    }
+    nav{
+        background-color: #563d7c;
+        position: fixed;
+    }
+    a:hover{
+        color: #afb7bf !important;
+        transition: 1s;
+    }
+    #header{
+        width: 100%;
+        height: 100px;
+    }
+    #header h1{
+        width: 100%;
+        font-family: 'Space Grotesk', sans-serif;
+    }
+    #add-body{
+        width: 50%;
+        margin: 0 25%;
+        padding: 3rem;
+    }
+</style>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand m-1 p-4 color-text" href="">OTP Sending App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link color-text" href="">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link color-text" href="/add">Add</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link color-text" href="/messages">Messages</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+      <div class="container pt-5 text-center">
+        <div id="header">
+            <h1>Add A New Contact <i class="bi bi-person-plus m-2"></i></h1>
+            <div id="alert"></div>
+        </div>
+        <div id="add-body">
+            <div class="mb-3">
+                <input onkeyup="verify(this.value)" class="control-form" type="text" id="first" placeholder="First Name ..." required>
+            </div>
+            <div class="mb-3">
+                <input onkeyup="verify(this.value)" class="control-form" type="text" id="last" placeholder="Last Name ..." required>
+            </div>
+            <div class="mb-3">
+                <input onkeyup="verify(this.value)" class="control-form" type="number" id="country" placeholder="Country Code" required>
+            </div>
+            <div class="mb-3">
+                <input onkeyup="verify(this.value)" class="control-form" type="number" id="number" placeholder="Number" required>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success float-end" id="add">Add</button>
+            </div>
+        </div>
+
+      </div>
+  <script>
+    //Add new contact to localstorage
+        let first   = document.getElementById('first');
+        let last    = document.getElementById('last');
+        let country = document.getElementById('country');
+        let number  = document.getElementById('number');
+        let sms  = document.getElementById('sms');
+        let add  = document.getElementById('add');
+        
+        //verify inputs fields
+        function verify(val){
+            if (val == ''){
+                msg = 'Required'
+                document.getElementById('alert').innerHTML = '<h6 class="alert alert-danger">' + msg + '</h6>';
+            }else{
+                msg = 'perfect'
+                document.getElementById('alert').innerHTML = '<h6 class="alert alert-success">' + msg + '</h6>';
+            }
+        }
+
+        //if onclick from button
+        let Data;
+        if (localStorage.contact != null){
+            Data = JSON.parse(localStorage.contact);
+        }else{
+            Data = []
+        }
+        add.onclick = function(){
+            let newContact = {}
+            if (first.value != '' & last.value != '' & country.value != '' & number.value != ''){
+                newContact = {
+                    first: first.value,  
+                    last: last.value,
+                    country: country.value,
+                    //sms: sms.value,
+                    number: number.value,    
+                }
+                Data.push(newContact)
+                localStorage.setItem('contact', JSON.stringify(Data))
+            }else{
+                msg = 'fields must be required'
+                document.getElementById('alert').innerHTML = '<h6 class="alert alert-danger">' + msg + '</h6>';
+            }
+            console.log(Data)
+        }
+  </script>
+</body>
+</html> 
