@@ -7,10 +7,10 @@ This app created using nodejs. with this app you can :
 - Manage all informations like : phone numbers, country, Age, Name, SMS sended.
 - You can send a new verification number to your favorites numbers.
 # Frameworks using here:
-<a href="https://expressjs.com/">ExpressJS</a>
-<a href="https://www.fast2sms.com/">Fast Two SMS</a>
-<a href="https://www.twilio.com/">Twilio</a>
-<a href="https://nodejs.org/en/">Twilio</a>
+- <a href="https://expressjs.com/">ExpressJS</a>
+- <a href="https://www.fast2sms.com/">Fast Two SMS</a>
+- <a href="https://www.twilio.com/">Twilio</a>
+<a href="https://nodejs.org/en/">NodeJS</a>
 
 # What You Need:
 - Experience to using NPM.
